@@ -88,7 +88,7 @@ fetchJoke()
   console.error(error);
 });
 
-random.addEventListener('click, fetchJoke');
+random.addEventListener('click', fetchJoke);
 
 //javascript comment
 
@@ -111,4 +111,7 @@ async function fetchJoke() {
       return [json_response["joke"], null];
     }
   }
+
+//number api
+
 
