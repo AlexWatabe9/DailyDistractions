@@ -91,3 +91,24 @@ fetchJoke()
 random.addEventListener('click, fetchJoke');
 
 //javascript comment
+
+var random = document.getElementById("facts-button")
+
+async function fetchJoke() {
+    // API endpoint URL
+    var url = "https://sv443.net/jokeapi/v2/joke/Any";
+  
+    // Make API request
+    var response = await fetch(url);
+  
+    // Get the JSON response
+    var json_response = await response.json();
+  
+    // Return the setup and punchline of the joke
+    if (json_response["type"] === "twopart") {
+      return [json_response["setup"], json_response["delivery"]];
+    } else {
+      return [json_response["joke"], null];
+    }
+  }
+
