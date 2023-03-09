@@ -57,7 +57,7 @@ var random = document.getElementById("random-button")
 
 async function fetchJoke() {
     // API endpoint URL
-    var url = "https://sv443.net/jokeapi/v2/joke/Any";
+    var url = "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
   
     // Make API request
     var response = await fetch(url);
