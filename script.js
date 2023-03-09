@@ -89,3 +89,5 @@ fetchJoke()
 });
 
 random.addEventListener('click, fetchJoke');
+
+//javascript comment
