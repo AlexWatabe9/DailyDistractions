@@ -1,4 +1,4 @@
-var jokes = document.getElementById("jokes-button");
+var jokesButton = document.getElementById("jokes-button");
 var displayEl = document.getElementById("displayText");
 async function fetchJoke() {
   // API endpoint URL
@@ -10,7 +10,7 @@ async function fetchJoke() {
 
   // Get the JSON response
   var response = await requestApi.json();
-
+  var jokeText = "";
   // Return the setup and punchline of the joke
   if (response["type"] === "twopart") {
     return [response["setup"], response["delivery"]];
@@ -34,16 +34,15 @@ fetchJoke()
     console.error(error);
 
     var displayJoke = document.createElement("p");
-    displayJoke.innerText = joke;
+    displayJoke.innerText = jokeText;
     displayEl.innerHTML = "";
     displayEl.append(displayJoke);
   });
 
-jokes.addEventListener("click", fetchJoke);
-console.log(jokes);
+jokesButton.addEventListener("click", fetchJoke);
 
 
-
+//------------ numbers api
 var factsButton = document.getElementById("Facts-button");
 
 
