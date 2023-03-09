@@ -1,4 +1,4 @@
-var random = document.getElementById("random-button");
+var jokes = document.getElementById("jokes-button")
 
 async function fetchJoke() {
   // API endpoint URL
@@ -34,4 +34,13 @@ fetchJoke()
     console.error(error);
   });
 
-random.addEventListener("click", fetchJoke);
+
+
+
+
+
+
+
+
+jokes.addEventListener('click', fetchJoke);
+console.log(jokes);
