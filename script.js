@@ -41,3 +41,31 @@ fetchJoke()
 
 jokes.addEventListener("click", fetchJoke);
 console.log(jokes);
+
+
+
+var factsButton = document.getElementById("Facts-button");
+
+
+
+  var number = 42;
+  var type = 'math';
+  var url = `http://numbersapi.com/${number}/${type}`;
+
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.text();
+      } else {
+        throw new Error('Something went wrong');
+      }
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+
+
