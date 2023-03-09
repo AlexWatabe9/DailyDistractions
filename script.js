@@ -1,21 +1,21 @@
-var jokes = document.getElementById("jokes-button")
-
+var jokes = document.getElementById("jokes-button");
+var displayEl = document.getElementById("displayText");
 async function fetchJoke() {
   // API endpoint URL
   var url =
     "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
 
   // Make API request
-  var response = await fetch(url);
+  var requestApi = await fetch(url);
 
   // Get the JSON response
-  var json_response = await response.json();
+  var response = await requestApi.json();
 
   // Return the setup and punchline of the joke
-  if (json_response["type"] === "twopart") {
-    return [json_response["setup"], json_response["delivery"]];
+  if (response["type"] === "twopart") {
+    return [response["setup"], response["delivery"]];
   } else {
-    return [json_response["joke"], null];
+    return [response["joke"], null];
   }
 }
 
@@ -32,15 +32,12 @@ fetchJoke()
   })
   .catch((error) => {
     console.error(error);
+
+    var displayJoke = document.createElement("p");
+    displayJoke.innerText = joke;
+    displayEl.innerHTML = "";
+    displayEl.append(displayJoke);
   });
 
-
-
-
-
-
-
-
-
-jokes.addEventListener('click', fetchJoke);
+jokes.addEventListener("click", fetchJoke);
 console.log(jokes);
