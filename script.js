@@ -13,6 +13,7 @@ function fetchJoke() {
     return [response["joke"], null];
   }
 }
+<<<<<<< HEAD
 jokesButton.addEventListener("click",fetchJoke)
 function render(data) {
   var jokeEl = document.createElement("p");
@@ -24,6 +25,41 @@ function render(data) {
   }
   displayEl.appendChild(jokeEl);
 }
+=======
+
+// Fetch a random joke from the API
+fetchJoke()
+  .then(([setup, punchline]) => {
+    // Display the setup of the joke
+    console.log(setup);
+  })
+    //function for data 
+    .then(function (data) {
+      //looping over the fetch response and inserting the URL of your repos into a list
+      for (var i = 0; i < data.length; i++) {
+        //Create a paragraph element
+        var displayJoke = document.createElement('p');
+    
+        //Set the text of the paragraph element to the JSON response's .html_url property
+        displayJoke.textContent = data[i].html_url;
+    
+        //Append the paragraph element to the HTML element with the id 'displayEl'
+        displayEl.appendChild(displayJoke);
+      }
+    
+
+    // If the joke is a two-part joke, display the punchline too
+    if (punchline) {
+      console.log(punchline);
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+jokesButton.addEventListener("click", fetchJoke);
+
+>>>>>>> 4f33b2ed4aaa2942835183bc0783e87ad1334725
 
 //------------ numbers api
 
