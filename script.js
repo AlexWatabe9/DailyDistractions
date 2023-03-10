@@ -1,32 +1,33 @@
+var jokesButton = document.getElementById("Jokes-button");
+  var displayText = document.getElementById("content");
+  // API endpoint URL
 function fetchJoke() {
-  // API URL
+
   var url =
-    "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
-  // Make API request
-  var requestApi = fetch(url);
-  // Get the JSON response
-  // var response = requestApi.json();
-  // Return the setup and punchline of the joke
-//   if (response["type"] === "twopart") {
-//     return [response["setup"], response["delivery"]];
-//   } else {
-//     return [response["joke"], null];
-//   }
-// }
+    'https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit';
+    fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.text();
+      } else {
+         Error('Something went wrong');
+      }
+    })
+    .then(data => {
+      console.log(data);
+      render(data);
+    })
 
+// jokesButton.addEventListener("click",fetchJoke)
 
-    // If the joke is a two-part joke, display the punchline too
-    if (punchline) {
-      console.log(punchline);
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+function render(data) {
+  var jokeEl = document.createElement("p");
+  jokeEl.textContent = data;
+  displayText.appendChild(jokeEl);
+}
 }
 
-// jokesButton.addEventListener("click", fetchJoke);
-
+jokesButton.addEventListener('click', fetchJoke)
 
 //------------ numbers api
 
