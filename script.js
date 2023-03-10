@@ -1,3 +1,10 @@
+var factsButton = document.getElementById("facts-button");
+//referencing the number api
+var displayText = document.getElementById("content");
+//referencing the number api
+
+
+
 function fetchJoke() {
   // API URL
   var url =
@@ -55,6 +62,7 @@ function fetchJoke() {
 
 var factsButton = document.getElementById("facts-button");
 var displayText = document.getElementById("content");
+//move all global vars to the top and all event listeners at bottom
 //attaching to a button
 function fetchFact() {
   var number = 100;
@@ -81,5 +89,5 @@ function fetchFact() {
   }
 
 }
-console.log(fetchFact)
+// console.log(fetchFact)
 factsButton.addEventListener('click', fetchFact)
