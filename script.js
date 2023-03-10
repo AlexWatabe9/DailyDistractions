@@ -5,27 +5,14 @@ function fetchJoke() {
   // Make API request
   var requestApi = fetch(url);
   // Get the JSON response
-  var response = requestApi.json();
+  // var response = requestApi.json();
   // Return the setup and punchline of the joke
-  if (response["type"] === "twopart") {
-    return [response["setup"], response["delivery"]];
-  } else {
-    return [response["joke"], null];
-  }
-}
-<<<<<<< HEAD
-jokesButton.addEventListener("click",fetchJoke)
-function render(data) {
-  var jokeEl = document.createElement("p");
-  jokeEl.textContent = data;
-  if (punchline) {
-    var punchlineEl = document.createElement("p");
-    punchlineEl.textContent = punchline;
-    displayEl.appendChild(punchlineEl);
-  }
-  displayEl.appendChild(jokeEl);
-}
-=======
+//   if (response["type"] === "twopart") {
+//     return [response["setup"], response["delivery"]];
+//   } else {
+//     return [response["joke"], null];
+//   }
+// }
 
 // Fetch a random joke from the API
 fetchJoke()
@@ -56,17 +43,17 @@ fetchJoke()
   .catch((error) => {
     console.error(error);
   });
+}
 
-jokesButton.addEventListener("click", fetchJoke);
+// jokesButton.addEventListener("click", fetchJoke);
 
->>>>>>> 4f33b2ed4aaa2942835183bc0783e87ad1334725
 
 //------------ numbers api
 
 // //append into the box whatever we what to see (like a image using jquery)
 
 
-var factsButton = document.getElementById("Facts-button");
+var factsButton = document.getElementById("facts-button");
 var displayText = document.getElementById("content");
 
 var number = 100;
@@ -90,13 +77,5 @@ fetch(url)
 function render(data) {
   var fact = document.createElement('p');
   fact.textContent = data;
-  displayText.appendChild(fact);
+  displayText.appendChild(fact); 
 }
-
-
-// factsButton.addEventListener("click", () => {
-//   // code to execute when button is clicked
-// });
-
-
-
