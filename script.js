@@ -43,7 +43,7 @@ jokesButton.addEventListener("click", fetchJoke);
 
 
 //------------ numbers api
-// var factsButton = document.getElementById("Facts-button");
+
 // //append into the box whatever we what to see (like a image using jquery)
 
 var factsButton = document.getElementById("Facts-button");
