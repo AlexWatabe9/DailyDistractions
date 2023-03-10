@@ -77,7 +77,7 @@ function fetchFact() {
       }
     })
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       render(data);
     });
 
@@ -99,17 +99,15 @@ function fetchFact() {
 
 
 
+var likeButton = document.getElementById("like");
 
-var likeButton = document.getElementById ("like")
-function like() {  
-  localStorage.setItem(likeButton, userInput);
-};
-
-
-likeButton.addEventListener('click', likeButton)
-
-
-
+//favorite button
+likeButton.addEventListener('click', function () {
+  var userInput = document.querySelector('like')
+  var likeButton = document.querySelector('like')
+  console.log (hello)
+  localStorage.setItem(userInput, likeButton);
+});
 
 
 
@@ -124,7 +122,10 @@ likeButton.addEventListener('click', likeButton)
 
 
 
-factsButton.addEventListener('click', fetchFact)
+
+
+
+
 factsButton.addEventListener("click", fetchFact);
 
 function fetchDogs() {
