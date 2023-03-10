@@ -1,41 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Distractions</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <!-- This is the nav bar with buttons!!! -->
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daily Distractions</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<!-- This is the nav bar with buttons!!! -->
+  <body>
+    <h1>Daily Distractions</h1>
+    <nav>
+      <button id="random-button">Random</button>
+      <button id="facts-button">Fun-Facts</button>
+      <button id="dog-button">Dogs</button>
+      <button id="memes-button">Cats</button>
+      <button id="jokes-button">Memes</button>
+      <button id="cats-button">Jokes</button>
+    </nav>
 
-<body>
-  <h1>Daily Distractions</h1>
-  <nav>
-    <div>
-      <ul>
-        <li><button id="random-button">random</button></li>
-        <li><button id="facts-button">Facts</button></li>
-        <li><button id="dog-button">dogs</button></li>
-        <li><button id="memes-button">memes</button></li>
-        <li><button id="jokes-button">jokes</button></li>
-        <li><button id="cats-button">cats</button></li>
-      </ul>
+    <div id="content">
+      <p>Content will appear here.</p>
     </div>
-  </nav>
-  <span id="box"></span>
-  <div id="displayText">text</div>
-  <div id="">picture</div>
 
-
-  <script src="./script.js"></script>
-</body>
-<footer>
-  <button id="Likes">Likes</button>
-  <button id="Dislikes">Dislikes</button>
-  <button id="random">Random</button>
-  <button id="favorites">Favorites</button>
-</footer>
-
+    <button id="like">Like</button>
+    <button id="dislike">Dislike</button>
+    <script src="./script.js"></script>
+  </body>
 </html>
