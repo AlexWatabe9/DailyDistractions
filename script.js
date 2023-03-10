@@ -46,6 +46,7 @@ jokesButton.addEventListener("click", fetchJoke);
 
 // //append into the box whatever we what to see (like a image using jquery)
 
+
 var factsButton = document.getElementById("Facts-button");
 var displayText = document.getElementById("displayText");
 
@@ -76,6 +77,9 @@ function render(data) {
 }
 
 
+// factsButton.addEventListener("click", () => {
+//   // code to execute when button is clicked
+// });
 
 
 
