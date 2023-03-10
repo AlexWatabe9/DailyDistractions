@@ -75,3 +75,18 @@ function render(data) {
   fact.textContent = data;
   displayText.appendChild(fact);
 }
+
+
+var dogsButton = document.getElementById("dogs-button");
+var displayContent = document.getElementById("content");
+
+
+dogsButton.addEventListener("click", () => {
+  fetch("https://random.dog/woof.json?ref=apilist.fun")
+  .then(response) => {
+    if (response.ok) {
+      return response.json()
+    }
+  }
+
+})
