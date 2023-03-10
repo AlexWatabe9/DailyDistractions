@@ -49,7 +49,7 @@ jokesButton.addEventListener("click", fetchJoke);
 
 // //append into the box whatever we what to see (like a image using jquery)
 
-var factsButton = document.getElementById("Facts-button");
+var factsButton = document.getElementById("facts-button");
 var displayText = document.getElementById("content");
 
 var number = 100;
