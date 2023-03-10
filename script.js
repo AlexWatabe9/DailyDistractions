@@ -2,6 +2,10 @@ var factsButton = document.getElementById("facts-button");
 //referencing the number api
 var displayText = document.getElementById("content");
 //referencing the number api
+var dogBtn = document.getElementById("dog-button");
+//referencing the dog pics api
+var displayPic = document.getElementById("content");
+//referencing the dog pics api
 
 function fetchJoke() {
   // API URL
@@ -84,3 +88,27 @@ function fetchFact() {
   }
 }
 factsButton.addEventListener("click", fetchFact);
+
+function fetchDogs() {
+  var url = "https://random.dog/woof.json?ref=apilist.fun";
+
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        Error("Something isn't working!");
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      render(data);
+    });
+
+  function render(data) {
+    var dogPics = document.createElement("p");
+    dogPics.innerHTML = `<img src="${data.url}" alt="Random dog image">`;
+    displayPic.appendChild(dogPics);
+  }
+}
+dogBtn.addEventListener("click", fetchDogs);
