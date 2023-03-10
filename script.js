@@ -1,16 +1,11 @@
-var jokesButton = document.getElementById("jokes-button");
-var displayEl = document.getElementById("displayText");
-async function fetchJoke() {
-  // API endpoint URL
+function fetchJoke() {
+  // API URL
   var url =
     "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
-
   // Make API request
-  var requestApi = await fetch(url);
-
+  var requestApi = fetch(url);
   // Get the JSON response
-  var response = await requestApi.json();
-  var jokeText = "";
+  var response = requestApi.json();
   // Return the setup and punchline of the joke
   if (response["type"] === "twopart") {
     return [response["setup"], response["delivery"]];
@@ -18,6 +13,19 @@ async function fetchJoke() {
     return [response["joke"], null];
   }
 }
+<<<<<<< HEAD
+jokesButton.addEventListener("click",fetchJoke)
+function render(data) {
+  var jokeEl = document.createElement("p");
+  jokeEl.textContent = data;
+  if (punchline) {
+    var punchlineEl = document.createElement("p");
+    punchlineEl.textContent = punchline;
+    displayEl.appendChild(punchlineEl);
+  }
+  displayEl.appendChild(jokeEl);
+}
+=======
 
 // Fetch a random joke from the API
 fetchJoke()
@@ -51,15 +59,17 @@ fetchJoke()
 
 jokesButton.addEventListener("click", fetchJoke);
 
+>>>>>>> 4f33b2ed4aaa2942835183bc0783e87ad1334725
 
 //------------ numbers api
-// var factsButton = document.getElementById("Facts-button");
+
 // //append into the box whatever we what to see (like a image using jquery)
 
-var factsButton = document.getElementById("Facts-button");
-var displayText = document.getElementById("displayText");
 
-var number = 42;
+var factsButton = document.getElementById("Facts-button");
+var displayText = document.getElementById("content");
+
+var number = 100;
 var type = 'math';
 var url = `http://numbersapi.com/${number}/${type}`;
 
@@ -68,16 +78,14 @@ fetch(url)
     if (response.ok) {
       return response.text();
     } else {
-      throw new Error('Something went wrong');
+       Error('Something went wrong');
     }
   })
   .then(data => {
     // console.log(data);
     render(data);
   })
-  .catch(error => {
-    console.error(error);
-  });
+
 
 function render(data) {
   var fact = document.createElement('p');
@@ -86,6 +94,9 @@ function render(data) {
 }
 
 
+// factsButton.addEventListener("click", () => {
+//   // code to execute when button is clicked
+// });
 
 
 
