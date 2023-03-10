@@ -48,9 +48,9 @@ jokesButton.addEventListener("click", fetchJoke);
 
 
 var factsButton = document.getElementById("Facts-button");
-var displayText = document.getElementById("displayText");
+var displayText = document.getElementById("content");
 
-var number = 42;
+var number = 100;
 var type = 'math';
 var url = `http://numbersapi.com/${number}/${type}`;
 
@@ -59,16 +59,14 @@ fetch(url)
     if (response.ok) {
       return response.text();
     } else {
-      throw new Error('Something went wrong');
+       Error('Something went wrong');
     }
   })
   .then(data => {
     // console.log(data);
     render(data);
   })
-  .catch(error => {
-    console.error(error);
-  });
+
 
 function render(data) {
   var fact = document.createElement('p');
