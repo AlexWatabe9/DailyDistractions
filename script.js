@@ -52,41 +52,30 @@ function fetchJoke() {
 
 var factsButton = document.getElementById("facts-button");
 var displayText = document.getElementById("content");
+//attaching to a button
+function fetchFact() {
+  var number = 100;
+  var type = "math";
+  var url = `http://numbersapi.com/${number}/${type}`;
 
-var number = 100;
-var type = "math";
-var url = `http://numbersapi.com/${number}/${type}`;
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.text();
+      } else {
+        Error("Something went wrong");
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      render(data);
+    });
 
-fetch(url)
-  .then((response) => {
-    if (response.ok) {
-      return response.text();
-    } else {
-      Error("Something went wrong");
-    }
-  })
-  .then((data) => {
-    // console.log(data);
-    render(data);
-  });
-
-function render(data) {
-  var fact = document.createElement("p");
-  fact.textContent = data;
-  displayText.appendChild(fact);
-}
-
-
-var dogsButton = document.getElementById("dogs-button");
-var displayContent = document.getElementById("content");
-
-
-dogsButton.addEventListener("click", () => {
-  fetch("https://random.dog/woof.json?ref=apilist.fun")
-  .then(response) => {
-    if (response.ok) {
-      return response.json()
-    }
+  function render(data) {
+    var facts = document.createElement("p");
+    facts.textContent = data;
+    displayText.appendChild(facts);
   }
-
-})
+}
+console.log(fetchFact);
+factsButton.addEventListener("click", fetchFact);
