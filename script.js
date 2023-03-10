@@ -5,30 +5,27 @@ function fetchJoke() {
   // Make API request
   var requestApi = fetch(url);
   // Get the JSON response
-  var response = requestApi.json();
+  // var response = requestApi.json();
   // Return the setup and punchline of the joke
-  if (response["type"] === "twopart") {
-    return [response["setup"], response["delivery"]];
-  } else {
-    return [response["joke"], null];
-  }
+//   if (response["type"] === "twopart") {
+//     return [response["setup"], response["delivery"]];
+//   } else {
+//     return [response["joke"], null];
+//   }
+// }
+
+
+    // If the joke is a two-part joke, display the punchline too
+    if (punchline) {
+      console.log(punchline);
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 }
 
-jokesButton.addEventListener("click",fetchJoke)
-
-function render(data) {
-  var jokeEl = document.createElement("p");
-  jokeEl.textContent = data;
-
-  if (punchline) {
-    var punchlineEl = document.createElement("p");
-    punchlineEl.textContent = punchline;
-    displayEl.appendChild(punchlineEl);
-  }
-
-  displayEl.appendChild(jokeEl);
-}
-
+// jokesButton.addEventListener("click", fetchJoke);
 
 
 //------------ numbers api
@@ -36,7 +33,7 @@ function render(data) {
 // //append into the box whatever we what to see (like a image using jquery)
 
 
-var factsButton = document.getElementById("Facts-button");
+var factsButton = document.getElementById("facts-button");
 var displayText = document.getElementById("content");
 
 var number = 100;
@@ -60,13 +57,5 @@ fetch(url)
 function render(data) {
   var fact = document.createElement('p');
   fact.textContent = data;
-  displayText.appendChild(fact);
+  displayText.appendChild(fact); 
 }
-
-
-// factsButton.addEventListener("click", () => {
-//   // code to execute when button is clicked
-// });
-
-
-
