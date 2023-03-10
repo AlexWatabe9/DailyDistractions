@@ -43,28 +43,39 @@ jokesButton.addEventListener("click", fetchJoke);
 
 
 //------------ numbers api
+// var factsButton = document.getElementById("Facts-button");
+// //append into the box whatever we what to see (like a image using jquery)
+
 var factsButton = document.getElementById("Facts-button");
+var displayText = document.getElementById("displayText");
+
+var number = 42;
+var type = 'math';
+var url = `http://numbersapi.com/${number}/${type}`;
+
+fetch(url)
+  .then(response => {
+    if (response.ok) {
+      return response.text();
+    } else {
+      throw new Error('Something went wrong');
+    }
+  })
+  .then(data => {
+    // console.log(data);
+    render(data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+function render(data) {
+  var fact = document.createElement('p');
+  fact.textContent = data;
+  displayText.appendChild(fact);
+}
 
 
-
-  var number = 42;
-  var type = 'math';
-  var url = `http://numbersapi.com/${number}/${type}`;
-
-  fetch(url)
-    .then(response => {
-      if (response.ok) {
-        return response.text();
-      } else {
-        throw new Error('Something went wrong');
-      }
-    })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
 
 
 
