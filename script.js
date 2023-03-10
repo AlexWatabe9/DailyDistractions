@@ -78,7 +78,7 @@ function fetchFact() {
       }
     })
     .then(data => {
-      console.log(data);
+      // console.log(data);
       render(data);
     })
 
@@ -90,4 +90,40 @@ function fetchFact() {
 
 }
 // console.log(fetchFact)
+
+
+// var dislikeButton = document.getElementById("dislike")
+
+// function likeButton () {
+// localStorage.setItem('like')
+// console.log(hello)
+// }
+
+
+
+
+var likeButton = document.getElementById ("like")
+function like() {  
+  localStorage.setItem(likeButton, userInput);
+};
+
+
+likeButton.addEventListener('click', likeButton)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 factsButton.addEventListener('click', fetchFact)
