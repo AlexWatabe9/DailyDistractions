@@ -59,28 +59,7 @@ function renderJoke(data) {
 }
 
 
-//Cat Facts
-function fetchCatFacts() {
-  var url = `https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1`;
-  fetch(url)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        Error("Something went wrong");
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      render(data);
-    });
 
-  function render(data) {
-    var catFacts = document.createElement("p");
-    catFacts.textContent = data.text;
-    displayText.appendChild(catFacts);
-  }
-}
 
 //Cat Facts
 function fetchCatFacts() {
