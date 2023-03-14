@@ -68,7 +68,9 @@ nav button:hover {
   background-color: #f44336;
   color: white;
 }
-
+.width{
+  width:300px
+}
 /* nav ul {
   list-style: none;
   margin: 0;
