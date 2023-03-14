@@ -1,3 +1,4 @@
+//Global Variables
 var randomButton = document.getElementById("random-button");
 var numberButton = document.getElementById("numbers-button");
 var displayText = document.getElementById("content");
@@ -7,18 +8,16 @@ var catBtn = document.getElementById("cats-button");
 var catFactsBtn = document.getElementById("cat-facts-button");
 var MemesButton = document.getElementById("Memes-button");
 var displayText = document.getElementById("content");
-var resetButton = document.getElementById('reset')
+var resetButton = document.getElementById("reset");
 var displayPic = document.getElementById("content");
 
-resetButton.addEventListener('click', function () {
-  location.reload()
-})
+resetButton.addEventListener("click", function () {
+  location.reload();
+});
 
 function refresh() {
   location.reload();
-
 }
-
 
 //Jokes
 
@@ -41,29 +40,40 @@ function fetchJoke() {
   // jokesButton.addEventListener("click",fetchJoke)
 }
 function renderJoke(data) {
-
   var jokeEl = document.createElement("p");
   if (data.type === "single") {
     jokeEl.textContent = data.joke;
     displayText.appendChild(jokeEl);
-  }
-
-
-
-  else {
+  } else {
     //my code goes here
     jokeEl.textContent = data.setup + data.delivery;
     displayText.appendChild(jokeEl);
   }
-
 }
 
+//Memes Button for random memes
+function fetchMemes() {
+  var url = "https://api.imgflip.com/get_memes";
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        Error("Something isn't right");
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      var memes = data.data.memes;
+      var randomMeme = Math.floor(Math.random() * memes.length);
+      var meme = memes[randomMeme];
+      displayPic.innerHTML = `<img src="${meme.url}" alt="${meme.name}">`;
+    });
+}
 
-
-
-//Cat Facts
+//Api to fetch cat facts
 function fetchCatFacts() {
-  var url = `https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1`;
+  var url = "https://catfact.ninja/fact?max_length=140";
   fetch(url)
     .then((response) => {
       if (response.ok) {
@@ -74,16 +84,11 @@ function fetchCatFacts() {
     })
     .then((data) => {
       console.log(data);
-      render(data);
+      displayPic.innerHTML = `<p>${data.fact}</p>`;
     });
-
-  function render(data) {
-    var catFacts = document.createElement("p");
-    catFacts.textContent = data.text;
-    displayText.appendChild(catFacts);
-  }
 }
 
+//Api to fetch dog pics
 function fetchDogs() {
   var url = "https://random.dog/woof.json?ref=apilist.fun";
 
@@ -107,13 +112,7 @@ function fetchDogs() {
   }
 }
 
-
-
-
 //------------ numbers api
-
-
-
 
 var numberButton = document.getElementById("number-button");
 var displayText = document.getElementById("content");
@@ -142,10 +141,6 @@ function render(data) {
   displayText.appendChild(facts);
 }
 
-numberButton.addEventListener("click", fetchNumber);
-
-
-
 //Cat Button for pictures of cats
 function fetchCats() {
   var url = "https://cataas.com/cat";
@@ -172,13 +167,12 @@ function fetchCats() {
   }
 }
 
-
 //recipes
 // var foodButton = document.querySelector('#food')
 
 function fetchFood() {
   // var url = "https://www.themealdb.com/api/json/v1/1/categories.php";
-  var url = 'https://www.themealdb.com/api/json/v1/1/random.php'
+  var url = "https://www.themealdb.com/api/json/v1/1/random.php";
   fetch(url)
     .then((response) => {
       if (response.ok) {
@@ -190,15 +184,14 @@ function fetchFood() {
     .then((data) => {
       console.log(data);
       render(data);
-
     })
     .catch((error) => {
       console.log(error.message);
     });
 
   function render(data) {
-    console.log(data.meals[0])
-    var recipe = data.meals[0]
+    console.log(data.meals[0]);
+    var recipe = data.meals[0];
     var recipeList = document.createElement("ul");
 
     console.log(recipe);
@@ -209,17 +202,9 @@ function fetchFood() {
 
     displayText.appendChild(recipeList);
   }
+}
 
-
-};
-
-var foodButton = document.querySelector('#food-button');
-
-// Add an event listener to the button element
-foodButton.addEventListener('click', fetchFood)
-
-
-//space
+var foodButton = document.querySelector("#food-button");
 
 //favorite button
 // var userInput = document.querySelector('userinput').value
@@ -229,7 +214,7 @@ favoritebutton.addEventListener("click", function () {
   //    var userInput = document.querySelector('userinput').value
   var content = document.querySelector("#content");
   // console.log(content.children[1].children[0].src)
-  var history = JSON.parse(localStorage.getItem("history")) || []
+  var history = JSON.parse(localStorage.getItem("history")) || [];
   if (content.children[1].children[0] === "IMG") {
     //if we get remove p tag with place holder change first child to index of 0
     console.log("I made it");
@@ -242,37 +227,36 @@ favoritebutton.addEventListener("click", function () {
 
 function fetchRandom() {
   var apiList = [
-    'fetchJoke', 'fetchDogs', 'fetchNumber'
-  ]
-  var i = apiList[Math.floor(Math.random() * apiList.length)]
-  console.log(i)
-  if (i === 'fetchJoke') {
+    "fetchJoke",
+    "fetchDogs",
+    "fetchNumber",
+    "fetchMemes",
+    "fetchCats",
+    "fetchCatFacts",
+  ];
+  var i = apiList[Math.floor(Math.random() * apiList.length)];
+  console.log(i);
+  if (i === "fetchJoke") {
     fetchJoke();
-  }
-  else if (i === 'fetchDogs') {
+  } else if (i === "fetchDogs") {
     fetchDogs();
-  }
-  else if (i === 'fetchNumber') {
+  } else if (i === "fetchNumber") {
     fetchNumber();
+  } else if (i === "fetchMemes") {
+    fetchMemes();
+  } else if (i === "fetchCats") {
+    fetchCats();
+  } else if (i === "fetchCatFacts") {
+    fetchCatFacts();
   }
-};
-
-
-
-
-
-
-
-
-
+}
 
 // factsButton.addEventListener("click", fetchFact);
 dogBtn.addEventListener("click", fetchDogs);
-
-
 randomButton.addEventListener("click", fetchRandom);
 jokesButton.addEventListener("click", fetchJoke);
-
-randomButton.addEventListener("click", fetchRandom);
+MemesButton.addEventListener("click", fetchMemes);
 catBtn.addEventListener("click", fetchCats);
 catFactsBtn.addEventListener("click", fetchCatFacts);
+foodButton.addEventListener("click", fetchFood);
+numberButton.addEventListener("click", fetchNumber);
