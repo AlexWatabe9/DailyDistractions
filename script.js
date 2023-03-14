@@ -128,23 +128,6 @@ function render(data) {
 numberButton.addEventListener("click", fetchNumber);
 
 
-// var numberButton = document.querySelector('#number-button');
-
-// // Add an event listener to the button element
-// numberButton.addEventListener('click', function() {
-//   fetchNumber();
-//   console.log('Button was clicked!');
-// });
-
-
-// console.log(fetchFact)
-
-
-// function render(data) {
-//   var space = document.createElement("p");
-//   space.textContent = data;
-//   displayText.appendChild(space);
-// }
 
 //Cat Button for pictures of cats
 function fetchCats() {
@@ -171,14 +154,9 @@ function fetchCats() {
 // var foodButton = document.querySelector('#food')
 
 function fetchFood() {
-  var url = "https://www.themealdb.com/api/json/v1/1/list.php?c=list";
+  var url = "https://www.themealdb.com/api/json/v1/1/categories.php";
 
-  fetch(url, { 
-    method: 'GET',    
-    withCredentials: true,    
-    crossorigin: true,    
-    mode: 'no-cors',
-  })
+  fetch(url)
     .then((response) => {
       if (response.ok) {
         return response.json();
