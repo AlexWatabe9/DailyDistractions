@@ -107,31 +107,27 @@ function fetchCatFacts() {
 
 function fetchDogs() {
   var url = "https://random.dog/woof.json?ref=apilist.fun";
-  var displayPic = document.getElementById('dogs');
-  
+
   fetch(url)
     .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error("Something isn't working!");
+        Error("Something isn't working!");
       }
     })
     .then((data) => {
       console.log(data);
       render(data);
-    })
-    .catch((error) => {
-      console.log(error.message);
     });
-  }
-  
+
   function render(data) {
     var dogPics = document.createElement("p");
     dogPics.innerHTML = `<img src="${data.url}"class = 'width' alt="Random dog image">`;
     displayPic.appendChild(dogPics);
   }
-  
+}
+
  
   
 
@@ -221,10 +217,13 @@ function fetchFood() {
     });
 
   function render(data) {
+    console.log(data.categories[0])
     var recipeList = document.createElement("ul");
-    data.results.forEach((recipe) => {
+    data.categories.forEach((recipe) => {
+      console.log(recipe);
       var recipeItem = document.createElement("li");
-      recipeItem.textContent = `${recipe.title} - ${recipe.href}`;
+      // recipeItem.textContent = `${recipe.strCategory} - ${recipe.strCategoryThumb}`;
+      recipeItem.innerHTML = `<h3> ${recipe.strCategory} <h3><img src="${recipe.strCategoryThumb} "class = "width" alt= "food image">`; 
       recipeList.appendChild(recipeItem);
     });
     displayText.appendChild(recipeList);
@@ -234,51 +233,17 @@ function fetchFood() {
 var foodButton = document.querySelector('#food-button');
 
 // Add an event listener to the button element
-foodButton.addEventListener('click', function() {
-  fetchFood();
-  console.log('Button was clicked!');
-});
+foodButton.addEventListener('click', fetchFood )
+// foodButton.addEventListener('click', function() {
+//   fetchFood();
+//   console.log('Button was clicked!');
+// });
 
 
 
 // foodButton.addEventListener('click', fetchFood);
 
 //space
-var disney = document.getElementById('disney');
-
-function fetchDisney() {
-  var url = "https://api.disneyapi.dev/characters";
-
-  fetch(url, { 
-    method: 'GET',    
-    withCredentials: true,    
-    crossorigin: true,    
-    mode: 'no-cors',
-  })
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error("Something isn't working!");
-    }
-  })
-  .then((data) => {
-    console.log(data);
-    render(data);
-  })
-  .catch((error) => {
-    console.log(error.message);
-  });
-}
-
-var disneyButton = document.querySelector('#disney-button');
-// Add an event listener to the button element
-disneyButton.addEventListener('click', function() {
-  fetchDisney();
-  console.log('Button was clicked!');
-});
-
-
 
 //favorite button
 // var userInput = document.querySelector('userinput').value
@@ -301,7 +266,7 @@ favoritebutton.addEventListener("click", function () {
 
 function fetchRandom(){
 var apiList=[
-  'fetchJoke','fetchDogs','fetchFact'
+  'fetchJoke','fetchDogs','fetchNumber'
 ]
 var i = apiList[Math.floor(Math.random()* apiList.length)]
 console.log(i)
@@ -311,8 +276,8 @@ if (i==='fetchJoke'){
 else if (i === 'fetchDogs'){
   fetchDogs();
 }
-else if (i === 'fetchFact'){
-  fetchFact();
+else if (i === 'fetchNumber'){
+  fetchNumber();
 }
 };
 
@@ -335,4 +300,3 @@ jokesButton.addEventListener("click", fetchJoke);
 randomButton.addEventListener("click", fetchRandom);
 catBtn.addEventListener("click", fetchCats);
 catFactsBtn.addEventListener("click", fetchCatFacts);
-
