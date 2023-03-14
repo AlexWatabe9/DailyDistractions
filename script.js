@@ -52,7 +52,7 @@ function renderJoke(data) {
   
   else {
     //my code goes here
-    jokeEl.textContent =` ${data.setup} + ${document.write("<br>")} + ${data.delivery}`;
+    jokeEl.textContent = data.setup + data.delivery;
     displayText.appendChild(jokeEl);
   }
 
