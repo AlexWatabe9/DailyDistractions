@@ -5,12 +5,20 @@ var dogsButton = document.getElementById("dogs-button");
 var catsButton = document.getElementById("cats-button");
 var MemesButton = document.getElementById("Memes-button");
 var displayText = document.getElementById("content");
+var resetButton = document.getElementById('reset')
 //referencing the number api
 var dogBtn = document.getElementById("dog-button");
 //referencing the dog pics api
 var displayPic = document.getElementById("content");
 //referencing the dog pics api
+resetButton.addEventListener('click', function(){
+  location.reload()
+})
 
+function refresh(){
+  location.reload();
+
+}
 function fetchJoke() {
 
   var url =
@@ -32,18 +40,21 @@ function fetchJoke() {
 
 }
 function renderJoke(data) {
+  refresh()
   var jokeEl = document.createElement("p");
   if (data.type === 'single') {
     jokeEl.textContent = data.joke;
     displayText.appendChild(jokeEl);
+    }
+  
 
-  }
+  
   else {
     //my code goes here
-    jokeEl.textContent = data.setup + '' + data.delivery;
+    refresh()
+    jokeEl.textContent =` ${data.setup} + ${document.write("<br>")} + ${data.delivery}`;
     displayText.appendChild(jokeEl);
   }
-
 
 }
 function fetchCat() {
@@ -165,7 +176,7 @@ function fetchDogs() {
 
   function render(data) {
     var dogPics = document.createElement("p");
-    dogPics.innerHTML = `<img src="${data.url}" alt="Random dog image">`;
+    dogPics.innerHTML = `<img src="${data.url}"class = "width" alt="Random dog image">`;
     displayPic.appendChild(dogPics);
   }
 }
@@ -191,9 +202,22 @@ favoritebutton.addEventListener('click', function () {
   localStorage.setItem("history", JSON.stringify(history));
 });
 
-
-
-
+function fetchRandom(){
+var apiList=[
+  'fetchJoke','fetchDogs','fetchFact'
+]
+var i = apiList[Math.floor(Math.random()* apiList.length)]
+console.log(i)
+if (i==='fetchJoke'){
+  fetchJoke();
+}
+else if (i === 'fetchDogs'){
+  fetchDogs();
+}
+else if (i === 'fetchFact'){
+  fetchFact();
+}
+};
 
 
 
@@ -210,3 +234,5 @@ dogBtn.addEventListener("click", fetchDogs);
 
 
 jokesButton.addEventListener("click", fetchJoke);
+
+randomButton.addEventListener("click", fetchRandom);
