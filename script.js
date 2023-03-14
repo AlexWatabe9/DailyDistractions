@@ -4,13 +4,12 @@ var displayText = document.getElementById("content");
 var jokesButton = document.getElementById("jokes-button");
 var dogBtn = document.getElementById("dog-button");
 var catBtn = document.getElementById("cats-button");
+var catFactsBtn = document.getElementById("cat-facts-button");
 var MemesButton = document.getElementById("Memes-button");
 var displayText = document.getElementById("content");
-//referencing the number api
-
-//referencing the dog pics api
 var displayPic = document.getElementById("content");
 
+//Jokes
 function fetchJoke() {
   var url =
     "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
@@ -40,8 +39,10 @@ function renderJoke(data) {
     displayText.appendChild(jokeEl);
   }
 }
-function fetchCat() {
-  var url = `https://cat-fact.herokuapp.com`;
+
+//Cat Facts
+function fetchCatFacts() {
+  var url = `https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1`;
   fetch(url)
     .then((response) => {
       if (response.ok) {
@@ -52,23 +53,17 @@ function fetchCat() {
     })
     .then((data) => {
       console.log(data);
-      renderJoke(data);
+      render(data);
     });
 
-  // jokesButton.addEventListener("click",fetchJoke)
-}
-function renderJoke(data) {
-  var jokeEl = document.createElement("p");
-  if (data.type === "single") {
-    jokeEl.textContent = data.joke;
-    displayText.appendChild(jokeEl);
-  } else {
-    //my code goes here
-    jokeEl.textContent = data.setup + data.delivery;
-    displayText.appendChild(jokeEl);
+  function render(data) {
+    var catFacts = document.createElement("p");
+    catFacts.textContent = data.text;
+    displayText.appendChild(catFacts);
   }
 }
-// dogs
+
+function fetchDogs() {
   var url = "https://random.dog/woof.json?ref=apilist.fun";
   var displayPic = document.getElementById('dogs');
   
@@ -87,6 +82,7 @@ function renderJoke(data) {
     .catch((error) => {
       console.log(error.message);
     });
+  }
   
   function render(data) {
     var dogPics = document.createElement("p");
@@ -168,7 +164,7 @@ numberButton.addEventListener("click", fetchNumber);
 //   displayText.appendChild(space);
 // }
 
-
+//Cat Button for pictures of cats
 function fetchCats() {
   var url = "https://cataas.com/cat";
 
@@ -295,24 +291,8 @@ favoritebutton.addEventListener("click", function () {
   localStorage.setItem("history", JSON.stringify(history));
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // factsButton.addEventListener("click", fetchFact);
-
-// dogBtn.addEventListener("click", fetchDogs);
-
-
+dogBtn.addEventListener("click", fetchDogs);
 jokesButton.addEventListener("click", fetchJoke);
-
 catBtn.addEventListener("click", fetchCats);
+catFactsBtn.addEventListener("click", fetchCatFacts);
