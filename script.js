@@ -90,25 +90,7 @@ function fetchDogs() {
     displayPic.appendChild(dogPics);
   }
   
-  var dogButton = document.querySelector('#dog-button');
-  dogButton.addEventListener('click', function() {
-    fetch(url)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Something isn't working!");
-        }
-      })
-      .then((data) => {
-        console.log(data);
-        render(data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-    console.log('Button was clicked!');
-  });
+ 
   
 
 //------------ numbers api
