@@ -1,5 +1,5 @@
 var randomButton = document.getElementById("random-button");
-var numbersButton = document.getElementById("numbers-button");
+var numberButton = document.getElementById("numbers-button");
 var displayText = document.getElementById("content");
 var jokesButton = document.getElementById("jokes-button");
 var dogBtn = document.getElementById("dog-button");
@@ -68,28 +68,28 @@ function renderJoke(data) {
     displayText.appendChild(jokeEl);
   }
 }
-dogButton.addEventListener("click", function () {
-  var url = "https://random.dog/woof.json?ref=apilist.fun";
+// dogButton.addEventListener("click", function () {
+//   var url = "https://random.dog/woof.json?ref=apilist.fun";
 
-  fetch(url)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        Error("Something isn't working!");
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      render(data);
-    });
+//   fetch(url)
+//     .then((response) => {
+//       if (response.ok) {
+//         return response.json();
+//       } else {
+//         Error("Something isn't working!");
+//       }
+//     })
+//     .then((data) => {
+//       console.log(data);
+//       render(data);
+//     });
 
-  function render(data) {
-    var dogPics = document.createElement("p");
-    dogPics.innerHTML = `<img src="${data.url}" alt="Random dog image">`;
-    displayPic.appendChild(dogPics);
-  }
-}
+//   function render(data) {
+//     var dogPics = document.createElement("p");
+//     dogPics.innerHTML = `<img src="${data.url}" alt="Random dog image">`;
+//     displayPic.appendChild(dogPics);
+//   }
+// });
 
 
 //------------ numbers api
@@ -99,8 +99,8 @@ dogButton.addEventListener("click", function () {
 // var numbersButton = document.getElementById("numbers-button");
 // var displayText = document.getElementById("content");
 
-numbersButton.addEventListener("click", fetchNumber);
-
+numberButton.addEventListener("click", fetchNumber);
+var fetchNumber = document.getElementById (fetchNumber);
 var factsButton = document.getElementById("facts-button");
 var displayText = document.getElementById("content");
 //move all global vars to the top and all event listeners at bottom
@@ -243,7 +243,7 @@ favoritebutton.addEventListener("click", function () {
 
 
 
-factsButton.addEventListener("click", fetchFact);
+// factsButton.addEventListener("click", fetchFact);
 
 dogBtn.addEventListener("click", fetchDogs);
 
