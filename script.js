@@ -68,36 +68,56 @@ function renderJoke(data) {
     displayText.appendChild(jokeEl);
   }
 }
-// dogButton.addEventListener("click", function () {
-//   var url = "https://random.dog/woof.json?ref=apilist.fun";
-
-//   fetch(url)
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json();
-//       } else {
-//         Error("Something isn't working!");
-//       }
-//     })
-//     .then((data) => {
-//       console.log(data);
-//       render(data);
-//     });
-
-//   function render(data) {
-//     var dogPics = document.createElement("p");
-//     dogPics.innerHTML = `<img src="${data.url}" alt="Random dog image">`;
-//     displayPic.appendChild(dogPics);
-//   }
-// });
-
+// dogs
+  var url = "https://random.dog/woof.json?ref=apilist.fun";
+  var displayPic = document.getElementById('dogs');
+  
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Something isn't working!");
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      render(data);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+  
+  function render(data) {
+    var dogPics = document.createElement("p");
+    dogPics.innerHTML = `<img src="${data.url}" alt="Random dog image">`;
+    displayPic.appendChild(dogPics);
+  }
+  
+  var dogButton = document.querySelector('#dog-button');
+  dogButton.addEventListener('click', function() {
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Something isn't working!");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        render(data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    console.log('Button was clicked!');
+  });
+  
 
 //------------ numbers api
 
-// //append into the box whatever we what to see (like a image using jquery)
-// var randomButton = document.getElementById("random-button");
-// var numbersButton = document.getElementById("numbers-button");
-// var displayText = document.getElementById("content");
+
 
 
 var numberButton = document.getElementById("number-button");
@@ -173,7 +193,7 @@ function fetchCats() {
 // var foodButton = document.querySelector('#food')
 
 function fetchFood() {
-  var url = "http://www.recipepuppy.com/api/";
+  var url = "https://www.themealdb.com/api/json/v1/1/list.php?c=list";
 
   fetch(url, { 
     method: 'GET',    
@@ -218,6 +238,43 @@ foodButton.addEventListener('click', function() {
 
 
 // foodButton.addEventListener('click', fetchFood);
+
+//space
+var disney = document.getElementById('disney');
+
+function fetchDisney() {
+  var url = "https://api.disneyapi.dev/characters";
+
+  fetch(url, { 
+    method: 'GET',    
+    withCredentials: true,    
+    crossorigin: true,    
+    mode: 'no-cors',
+  })
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error("Something isn't working!");
+    }
+  })
+  .then((data) => {
+    console.log(data);
+    render(data);
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
+}
+
+var disneyButton = document.querySelector('#disney-button');
+// Add an event listener to the button element
+disneyButton.addEventListener('click', function() {
+  fetchDisney();
+  console.log('Button was clicked!');
+});
+
+
 
 //favorite button
 // var userInput = document.querySelector('userinput').value
