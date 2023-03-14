@@ -19,8 +19,7 @@ function refresh(){
 } 
 
 
-//Jokes
-
+// Fetches Jokes 
 function fetchJoke() {
   var url =
     "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
@@ -56,7 +55,6 @@ function renderJoke(data) {
   }
 
 }
-
 
 //Cat Facts
 function fetchCatFacts() {
@@ -205,7 +203,7 @@ favoritebutton.addEventListener("click", function () {
 
 function fetchRandom(){
 var apiList=[
-  'fetchJoke','fetchDogs','fetchFact'
+  'fetchJoke','fetchDogs','fetchFact', 'fetchCatFacts', 'fetchCats'
 ]
 var i = apiList[Math.floor(Math.random()* apiList.length)]
 console.log(i)
@@ -218,6 +216,10 @@ else if (i === 'fetchDogs'){
 else if (i === 'fetchFact'){
   fetchFact();
 }
+else if (i === 'fetchCatFacts')
+fetchCatFacts();
+else if (i === fetchCats)
+fetchCats();
 };
 
 
