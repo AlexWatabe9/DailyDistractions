@@ -1,5 +1,6 @@
 var randomButton = document.getElementById("random-button");
-var factsButton = document.getElementById("facts-button");
+var numberButton = document.getElementById("numbers-button");
+var displayText = document.getElementById("content");
 var jokesButton = document.getElementById("jokes-button");
 var dogBtn = document.getElementById("dog-button");
 var catBtn = document.getElementById("cats-button");
@@ -56,6 +57,7 @@ function renderJoke(data) {
 
 }
 
+<<<<<<< HEAD
 //Cat Facts
 function fetchCatFacts() {
   var url = `https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1`;
@@ -71,13 +73,10 @@ function fetchCatFacts() {
       console.log(data);
       render(data);
     });
+=======
 
-  function render(data) {
-    var catFacts = document.createElement("p");
-    catFacts.textContent = data.text;
-    displayText.appendChild(catFacts);
-  }
-}
+>>>>>>> a96e20fd41fede960a5d5c438f6e8d4935695346
+
 
 //Cat Facts
 function fetchCatFacts() {
@@ -125,9 +124,19 @@ function fetchDogs() {
   }
 }
 
-function fetchFact() {
+ 
+  
+
+//------------ numbers api
+
+
+
+
+var numberButton = document.getElementById("number-button");
+var displayText = document.getElementById("content");
+
+function fetchNumber() {
   var number = Math.floor(Math.random() * 100);
-  console.log(number);
   var type = "math";
   var url = `http://numbersapi.com/${number}/${type}`;
 
@@ -140,21 +149,19 @@ function fetchFact() {
       }
     })
     .then((data) => {
-      // console.log(data);
       render(data);
     });
-
-  function render(data) {
-    var facts = document.createElement("p");
-    facts.textContent = data;
-    displayText.appendChild(facts);
-  }
 }
 
-// function likeButton () {
-// localStorage.setItem('like')
-// console.log(hello)
-// }
+function render(data) {
+  var facts = document.createElement("p");
+  facts.textContent = data;
+  displayText.appendChild(facts);
+}
+
+numberButton.addEventListener("click", fetchNumber);
+
+
 
 //Cat Button for pictures of cats
 function fetchCats() {
@@ -182,6 +189,58 @@ function fetchCats() {
   }
 }
 
+
+//recipes
+// var foodButton = document.querySelector('#food')
+
+function fetchFood() {
+  var url = "https://www.themealdb.com/api/json/v1/1/categories.php";
+
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Something isn't working!");
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      render(data);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+
+  function render(data) {
+    console.log(data.categories[0])
+    var recipeList = document.createElement("ul");
+    data.categories.forEach((recipe) => {
+      console.log(recipe);
+      var recipeItem = document.createElement("li");
+      // recipeItem.textContent = `${recipe.strCategory} - ${recipe.strCategoryThumb}`;
+      recipeItem.innerHTML = `<h3> ${recipe.strCategory} <h3><img src="${recipe.strCategoryThumb} "class = "width" alt= "food image">`; 
+      recipeList.appendChild(recipeItem);
+    });
+    displayText.appendChild(recipeList);
+  }
+}
+
+var foodButton = document.querySelector('#food-button');
+
+// Add an event listener to the button element
+foodButton.addEventListener('click', fetchFood )
+// foodButton.addEventListener('click', function() {
+//   fetchFood();
+//   console.log('Button was clicked!');
+// });
+
+
+
+// foodButton.addEventListener('click', fetchFood);
+
+//space
+
 //favorite button
 // var userInput = document.querySelector('userinput').value
 var favoritebutton = document.querySelector("#favorite");
@@ -190,7 +249,7 @@ favoritebutton.addEventListener("click", function () {
   //    var userInput = document.querySelector('userinput').value
   var content = document.querySelector("#content");
   // console.log(content.children[1].children[0].src)
-  var history = JSON.parse(localStorage.getItem("history")) || [];
+  var history = JSON.parse(localStorage.getItem("history")) || []
   if (content.children[1].children[0].tagName === "IMG") {
     //if we get remove p tag with place holder change first child to index of 0
     console.log("I made it");
@@ -203,7 +262,11 @@ favoritebutton.addEventListener("click", function () {
 
 function fetchRandom(){
 var apiList=[
+<<<<<<< HEAD
   'fetchJoke','fetchDogs','fetchFact', 'fetchCatFacts', 'fetchCats'
+=======
+  'fetchJoke','fetchDogs','fetchNumber'
+>>>>>>> a96e20fd41fede960a5d5c438f6e8d4935695346
 ]
 var i = apiList[Math.floor(Math.random()* apiList.length)]
 console.log(i)
@@ -213,8 +276,8 @@ if (i==='fetchJoke'){
 else if (i === 'fetchDogs'){
   fetchDogs();
 }
-else if (i === 'fetchFact'){
-  fetchFact();
+else if (i === 'fetchNumber'){
+  fetchNumber();
 }
 else if (i === 'fetchCatFacts')
 fetchCatFacts();
@@ -231,7 +294,7 @@ fetchCats();
 
 
 
-factsButton.addEventListener("click", fetchFact);
+// factsButton.addEventListener("click", fetchFact);
 dogBtn.addEventListener("click", fetchDogs);
 
 
@@ -241,4 +304,3 @@ jokesButton.addEventListener("click", fetchJoke);
 randomButton.addEventListener("click", fetchRandom);
 catBtn.addEventListener("click", fetchCats);
 catFactsBtn.addEventListener("click", fetchCatFacts);
-
