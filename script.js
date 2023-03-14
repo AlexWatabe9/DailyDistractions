@@ -20,7 +20,7 @@ function refresh(){
 
 
 //Jokes
-}
+
 function fetchJoke() {
   var url =
     "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
@@ -40,7 +40,7 @@ function fetchJoke() {
   // jokesButton.addEventListener("click",fetchJoke)
 }
 function renderJoke(data) {
-  refresh()
+  
   var jokeEl = document.createElement("p");
   if (data.type === "single") {
     jokeEl.textContent = data.joke;
@@ -51,12 +51,12 @@ function renderJoke(data) {
   
   else {
     //my code goes here
-    refresh()
     jokeEl.textContent =` ${data.setup} + ${document.write("<br>")} + ${data.delivery}`;
     displayText.appendChild(jokeEl);
   }
 
 }
+
 
 //Cat Facts
 function fetchCatFacts() {
@@ -122,7 +122,7 @@ function fetchDogs() {
 
   function render(data) {
     var dogPics = document.createElement("p");
-    dogPics.innerHTML = `<img src="${data.url}" alt="Random dog image">`;
+    dogPics.innerHTML = `<img src="${data.url}"class = 'width' alt="Random dog image">`;
     displayPic.appendChild(dogPics);
   }
 }
