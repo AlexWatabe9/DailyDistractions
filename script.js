@@ -10,14 +10,14 @@ var displayText = document.getElementById("content");
 var resetButton = document.getElementById('reset')
 var displayPic = document.getElementById("content");
 
-resetButton.addEventListener('click', function(){
+resetButton.addEventListener('click', function () {
   location.reload()
 })
 
-function refresh(){
+function refresh() {
   location.reload();
 
-} 
+}
 
 
 //Jokes
@@ -41,15 +41,15 @@ function fetchJoke() {
   // jokesButton.addEventListener("click",fetchJoke)
 }
 function renderJoke(data) {
-  
+
   var jokeEl = document.createElement("p");
   if (data.type === "single") {
     jokeEl.textContent = data.joke;
     displayText.appendChild(jokeEl);
-    }
-  
+  }
 
-  
+
+
   else {
     //my code goes here
     jokeEl.textContent = data.setup + data.delivery;
@@ -107,8 +107,8 @@ function fetchDogs() {
   }
 }
 
- 
-  
+
+
 
 //------------ numbers api
 
@@ -177,8 +177,8 @@ function fetchCats() {
 // var foodButton = document.querySelector('#food')
 
 function fetchFood() {
-  var url = "https://www.themealdb.com/api/json/v1/1/categories.php";
-
+  // var url = "https://www.themealdb.com/api/json/v1/1/categories.php";
+  var url = 'https://www.themealdb.com/api/json/v1/1/random.php'
   fetch(url)
     .then((response) => {
       if (response.ok) {
@@ -190,37 +190,34 @@ function fetchFood() {
     .then((data) => {
       console.log(data);
       render(data);
+
     })
     .catch((error) => {
       console.log(error.message);
     });
 
   function render(data) {
-    console.log(data.categories[0])
+    console.log(data.meals[0])
+    var recipe = data.meals[0]
     var recipeList = document.createElement("ul");
-    data.categories.forEach((recipe) => {
-      console.log(recipe);
-      var recipeItem = document.createElement("li");
-      // recipeItem.textContent = `${recipe.strCategory} - ${recipe.strCategoryThumb}`;
-      recipeItem.innerHTML = `<h3> ${recipe.strCategory} <h3><img src="${recipe.strCategoryThumb} "class = "width" alt= "food image">`; 
-      recipeList.appendChild(recipeItem);
-    });
+
+    console.log(recipe);
+    var recipeItem = document.createElement("li");
+
+    recipeItem.innerHTML = `<h3> ${recipe.strMeal} </h3><img src="${recipe.strMealThumb} "class = "width" alt= "food image">`;
+    recipeList.appendChild(recipeItem);
+
     displayText.appendChild(recipeList);
   }
-}
+
+
+};
 
 var foodButton = document.querySelector('#food-button');
 
 // Add an event listener to the button element
-foodButton.addEventListener('click', fetchFood )
-// foodButton.addEventListener('click', function() {
-//   fetchFood();
-//   console.log('Button was clicked!');
-// });
+foodButton.addEventListener('click', fetchFood)
 
-
-
-// foodButton.addEventListener('click', fetchFood);
 
 //space
 
@@ -233,7 +230,7 @@ favoritebutton.addEventListener("click", function () {
   var content = document.querySelector("#content");
   // console.log(content.children[1].children[0].src)
   var history = JSON.parse(localStorage.getItem("history")) || []
-  if (content.children[1].children[0].tagName === "IMG") {
+  if (content.children[1].children[0] === "IMG") {
     //if we get remove p tag with place holder change first child to index of 0
     console.log("I made it");
     history.push(content.children[1].children[0].src);
@@ -243,21 +240,21 @@ favoritebutton.addEventListener("click", function () {
   localStorage.setItem("history", JSON.stringify(history));
 });
 
-function fetchRandom(){
-var apiList=[
-  'fetchJoke','fetchDogs','fetchNumber'
-]
-var i = apiList[Math.floor(Math.random()* apiList.length)]
-console.log(i)
-if (i==='fetchJoke'){
-  fetchJoke();
-}
-else if (i === 'fetchDogs'){
-  fetchDogs();
-}
-else if (i === 'fetchNumber'){
-  fetchNumber();
-}
+function fetchRandom() {
+  var apiList = [
+    'fetchJoke', 'fetchDogs', 'fetchNumber'
+  ]
+  var i = apiList[Math.floor(Math.random() * apiList.length)]
+  console.log(i)
+  if (i === 'fetchJoke') {
+    fetchJoke();
+  }
+  else if (i === 'fetchDogs') {
+    fetchDogs();
+  }
+  else if (i === 'fetchNumber') {
+    fetchNumber();
+  }
 };
 
 
