@@ -6,9 +6,21 @@ var catBtn = document.getElementById("cats-button");
 var catFactsBtn = document.getElementById("cat-facts-button");
 var MemesButton = document.getElementById("Memes-button");
 var displayText = document.getElementById("content");
+var resetButton = document.getElementById('reset')
 var displayPic = document.getElementById("content");
 
+resetButton.addEventListener('click', function(){
+  location.reload()
+})
+
+function refresh(){
+  location.reload();
+
+} 
+
+
 //Jokes
+
 function fetchJoke() {
   var url =
     "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
@@ -28,14 +40,44 @@ function fetchJoke() {
   // jokesButton.addEventListener("click",fetchJoke)
 }
 function renderJoke(data) {
+  
   var jokeEl = document.createElement("p");
   if (data.type === "single") {
     jokeEl.textContent = data.joke;
     displayText.appendChild(jokeEl);
-  } else {
+    }
+  
+
+  
+  else {
     //my code goes here
-    jokeEl.textContent = data.setup + data.delivery;
+    jokeEl.textContent =` ${data.setup} + ${document.write("<br>")} + ${data.delivery}`;
     displayText.appendChild(jokeEl);
+  }
+
+}
+
+
+//Cat Facts
+function fetchCatFacts() {
+  var url = `https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1`;
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        Error("Something went wrong");
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      render(data);
+    });
+
+  function render(data) {
+    var catFacts = document.createElement("p");
+    catFacts.textContent = data.text;
+    displayText.appendChild(catFacts);
   }
 }
 
@@ -80,7 +122,7 @@ function fetchDogs() {
 
   function render(data) {
     var dogPics = document.createElement("p");
-    dogPics.innerHTML = `<img src="${data.url}" alt="Random dog image">`;
+    dogPics.innerHTML = `<img src="${data.url}"class = 'width' alt="Random dog image">`;
     displayPic.appendChild(dogPics);
   }
 }
@@ -134,6 +176,12 @@ function fetchCats() {
       var imageUrl = URL.createObjectURL(myBlob);
       displayPic.innerHTML = `<img src= "${imageUrl}" alt="Random cat image">`;
     });
+
+  function render(data) {
+    var dogPics = document.createElement("p");
+    dogPics.innerHTML = `<img src="${data.url}"class = "width" alt="Random dog image">`;
+    displayPic.appendChild(dogPics);
+  }
 }
 
 //favorite button
@@ -155,8 +203,40 @@ favoritebutton.addEventListener("click", function () {
   localStorage.setItem("history", JSON.stringify(history));
 });
 
+function fetchRandom(){
+var apiList=[
+  'fetchJoke','fetchDogs','fetchFact'
+]
+var i = apiList[Math.floor(Math.random()* apiList.length)]
+console.log(i)
+if (i==='fetchJoke'){
+  fetchJoke();
+}
+else if (i === 'fetchDogs'){
+  fetchDogs();
+}
+else if (i === 'fetchFact'){
+  fetchFact();
+}
+};
+
+
+
+
+
+
+
+
+
+
 factsButton.addEventListener("click", fetchFact);
 dogBtn.addEventListener("click", fetchDogs);
+
+
+randomButton.addEventListener("click", fetchRandom);
 jokesButton.addEventListener("click", fetchJoke);
+
+randomButton.addEventListener("click", fetchRandom);
 catBtn.addEventListener("click", fetchCats);
 catFactsBtn.addEventListener("click", fetchCatFacts);
+
