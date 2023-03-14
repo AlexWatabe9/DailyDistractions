@@ -99,15 +99,12 @@ function renderJoke(data) {
 // var numbersButton = document.getElementById("numbers-button");
 // var displayText = document.getElementById("content");
 
-numberButton.addEventListener("click", fetchNumber);
-var fetchNumber = document.getElementById (fetchNumber);
-var factsButton = document.getElementById("facts-button");
+
+var numberButton = document.getElementById("number-button");
 var displayText = document.getElementById("content");
-//move all global vars to the top and all event listeners at bottom
-//attaching to a button
-function fetchFact() {
-  var number = Math.floor(Math.random()*100);
-  console.log(number)
+
+function fetchNumber() {
+  var number = Math.floor(Math.random() * 100);
   var type = "math";
   var url = `http://numbersapi.com/${number}/${type}`;
 
@@ -120,16 +117,27 @@ function fetchFact() {
       }
     })
     .then((data) => {
-      // console.log(data);
       render(data);
     });
-
-  function render(data) {
-    var facts = document.createElement("p");
-    facts.textContent = data;
-    displayText.appendChild(facts);
-  }
 }
+
+function render(data) {
+  var facts = document.createElement("p");
+  facts.textContent = data;
+  displayText.appendChild(facts);
+}
+
+numberButton.addEventListener("click", fetchNumber);
+
+
+// var numberButton = document.querySelector('#number-button');
+
+// // Add an event listener to the button element
+// numberButton.addEventListener('click', function() {
+//   fetchNumber();
+//   console.log('Button was clicked!');
+// });
+
 
 // console.log(fetchFact)
 
@@ -162,7 +170,7 @@ function fetchCats() {
 
 
 //recipes
-var foodButton = document.querySelector('#food')
+// var foodButton = document.querySelector('#food')
 
 function fetchFood() {
   var url = "http://www.recipepuppy.com/api/";
@@ -199,7 +207,7 @@ function fetchFood() {
   }
 }
 
-var foodButton = document.getElementById('food-button');
+var foodButton = document.querySelector('#food-button');
 
 // Add an event listener to the button element
 foodButton.addEventListener('click', function() {
@@ -245,7 +253,7 @@ favoritebutton.addEventListener("click", function () {
 
 // factsButton.addEventListener("click", fetchFact);
 
-dogBtn.addEventListener("click", fetchDogs);
+// dogBtn.addEventListener("click", fetchDogs);
 
 
 jokesButton.addEventListener("click", fetchJoke);
