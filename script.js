@@ -86,8 +86,14 @@ function fetchCatFacts() {
     })
     .then((data) => {
       console.log(data);
-      displayPic.innerHTML = `<p>${data.fact}</p>`;
+      render(data);
     });
+
+  function render(data) {
+    var catFacts = document.createElement("p");
+    catFacts.innerHTML = `<p>${data.fact}</p>`;
+    displayPic.appendChild(catFacts);
+  }
 }
 
 //Api to fetch dog pics
@@ -144,6 +150,25 @@ function render(data) {
 }
 
 //Cat Button for pictures of cats
+// function fetchCats() {
+//   var url = "https://cataas.com/cat";
+
+//   fetch(url)
+//     .then((response) => {
+//       if (response.ok) {
+//         //Used .blob instead of .json because the API returns an image file, not JSON data.
+//         //https://developer.mozilla.org/en-US/docs/Web/API/Response/blob
+//         return response.blob();
+//       } else {
+//         Error("Something doesn't work!");
+//       }
+//     })
+//     .then((myBlob) => {
+//       var imageUrl = URL.createObjectURL(myBlob);
+//       displayPic.innerHTML = `<img src= "${imageUrl}" alt="Random cat image">`;
+//       console.log(myBlob)
+//     });
+//   };
 function fetchCats() {
   var url = "https://cataas.com/cat";
 
@@ -159,16 +184,15 @@ function fetchCats() {
     })
     .then((myBlob) => {
       var imageUrl = URL.createObjectURL(myBlob);
-      displayPic.innerHTML = `<img src= "${imageUrl}" alt="Random cat image">`;
+      render(imageUrl);
     });
 
-  function render(data) {
-    var dogPics = document.createElement("p");
-    dogPics.innerHTML = `<img src="${data.url}"class = "width" alt="Random dog image">`;
-    displayPic.appendChild(dogPics);
+  function render(imageUrl) {
+    var paragraph = document.createElement("p");
+    displayPic.innerHTML = `<img src= "${imageUrl}" alt="Random cat image">`;
+    displayPic.appendChild(paragraph);
   }
 }
-
 //recipes
 // var foodButton = document.querySelector('#food')
 
@@ -219,15 +243,12 @@ favoritebutton.addEventListener("click", function () {
   // console.log(content.children[1].children[0].src)
   var history = JSON.parse(localStorage.getItem("history")) || []
   var saveContent = content.children[1].children[0];
+  var otherContent = content.children[1];
   if (typeof saveContent !== 'undefined' && saveContent.tagName === "IMG") {
     //if we get remove p tag with place holder change first child to index of 0
     // console.log("I made it");
     history.push(content.children[1].children[0].src);
   }
-  else if (typeof saveContent !== 'undefined' && data.type === "single" && saveContent.tagName === "IMG") {
-    history.push(content.children[1].children[0].src);
-  }
-  
    else {
     history.push(content.children[1].textContent);
   }
@@ -304,3 +325,4 @@ catBtn.addEventListener("click", fetchCats);
 catFactsBtn.addEventListener("click", fetchCatFacts);
 foodButton.addEventListener("click", fetchFood);
 numberButton.addEventListener("click", fetchNumber);
+likeButton.addEventListener("click", getLikes);
