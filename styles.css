@@ -1,12 +1,16 @@
+body {
+  background-color: #f1f1f1;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 h1 {
   display: inline-flex;
   font-size: 45px;
-  font-family: "Courier New", Courier, monospace;
-  color: coral;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1e90ff;
   align-items: center;
   justify-content: center;
   display: flex;
-  text-decoration: underline dotted;
 }
 
 h2 {
@@ -15,53 +19,76 @@ h2 {
 }
 nav {
   height: 50px;
-  background-color: #3e791f;
+  background-color: #1e90ff;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  border-radius: 5px;
 }
 
 nav button {
   float: left;
   display: block;
-  color: white;
+  color: #fff;
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  margin-left: 10px;
   text-decoration: none;
   font-size: 17px;
   border: none;
   cursor: pointer;
   background-color: inherit;
+  transition: background-color 0.2s ease-in-out;
 }
 
 nav button:hover {
-  background-color: #ddd;
+  background-color: #2076cd;
   color: black;
+  border-radius: 5px;
 }
 
 #content {
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid #ddd;
-  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid black;
+  width: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#content p {
+  font-size: 1.2rem;
+  line-height: 1.5;
 }
 
 #like,
 #favorite,
 #reset {
-  padding: 14px 16px;
+  background-color: #1e90ff;
+  padding: 10px 20px;
   font-size: 16px;
   text-decoration: none;
   text-align: center;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  color: white;
+  color: #fff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#like:hover,
+#favorite:hover,
+#reset:hover {
+  background-color: #2076cd;
+  color: black;
 }
 
 .width {
-  width: 300px;
+  width: 500px;
 }
 
 @media screen and (max-width: 500px) {

@@ -71,7 +71,7 @@ function fetchMemes() {
       var randomMeme = Math.floor(Math.random() * memes.length);
       var meme = memes[randomMeme];
       var paragraph = document.createElement("p");
-      paragraph.innerHTML = `<img src="${meme.url}" alt="${meme.name}">`;
+      paragraph.innerHTML = `<img src="${meme.url}" class="width" alt="${meme.name}">`;
       displayPic.appendChild(paragraph);
     });
 }
@@ -173,7 +173,7 @@ function fetchCats() {
 
   function render(imageUrl) {
     var paragraph = document.createElement("p");
-    paragraph.innerHTML = `<img src= "${imageUrl}" alt="Random cat image">`;
+    paragraph.innerHTML = `<img src= "${imageUrl}" class="width" alt="Random cat image">`;
     displayPic.appendChild(paragraph);
   }
 }
