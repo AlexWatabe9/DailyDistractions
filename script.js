@@ -9,6 +9,7 @@ var MemesButton = document.getElementById("Memes-button");
 var displayText = document.getElementById("content");
 var resetButton = document.getElementById('reset')
 var displayPic = document.getElementById("content");
+var likeButton = document.getElementById("like");
 
 resetButton.addEventListener('click', function(){
   location.reload()
@@ -57,7 +58,6 @@ function renderJoke(data) {
 
 }
 
-<<<<<<< HEAD
 //Cat Facts
 function fetchCatFacts() {
   var url = `https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1`;
@@ -73,10 +73,13 @@ function fetchCatFacts() {
       console.log(data);
       render(data);
     });
-=======
 
->>>>>>> a96e20fd41fede960a5d5c438f6e8d4935695346
-
+  function render(data) {
+    var catFacts = document.createElement("p");
+    catFacts.textContent = data.text;
+    displayText.appendChild(catFacts);
+  }
+}
 
 //Cat Facts
 function fetchCatFacts() {
@@ -188,11 +191,6 @@ function fetchCats() {
     displayPic.appendChild(dogPics);
   }
 }
-
-
-//recipes
-// var foodButton = document.querySelector('#food')
-
 function fetchFood() {
   var url = "https://www.themealdb.com/api/json/v1/1/categories.php";
 
@@ -243,6 +241,7 @@ foodButton.addEventListener('click', fetchFood )
 
 //favorite button
 // var userInput = document.querySelector('userinput').value
+
 var favoritebutton = document.querySelector("#favorite");
 
 favoritebutton.addEventListener("click", function () {
@@ -250,23 +249,56 @@ favoritebutton.addEventListener("click", function () {
   var content = document.querySelector("#content");
   // console.log(content.children[1].children[0].src)
   var history = JSON.parse(localStorage.getItem("history")) || []
-  if (content.children[1].children[0].tagName === "IMG") {
+  var saveContent = content.children[1].children[0];
+  if (typeof saveContent !== 'undefined' && saveContent.tagName === "IMG") {
     //if we get remove p tag with place holder change first child to index of 0
-    console.log("I made it");
+    // console.log("I made it");
     history.push(content.children[1].children[0].src);
-  } else {
+  }
+  else if (typeof saveContent !== 'undefined' && data.type === "single" && saveContent.tagName === "IMG") {
+    history.push(content.children[1].children[0].src);
+  }
+  
+   else {
     history.push(content.children[1].textContent);
   }
   localStorage.setItem("history", JSON.stringify(history));
 });
 
+function checkUrl(string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+function getLikes() {
+  var content = document.querySelector("#content");
+  var myLikes = JSON.parse(localStorage.getItem('history'));
+  for (var i = 0; i < myLikes.length; i++ ){
+    if (checkUrl(myLikes[i])){ 
+      var myImage = document.createElement('img')
+      myImage.src = myLikes[i];
+      // set the source of the image href = i 
+      displayText.appendChild(myImage);
+      
+    } else {
+      // build paragraph tag and set content 
+      var like = document.createElement("p");
+      like.textContent = myLikes[i];
+      displayText.appendChild(like);
+    }
+  
+  }
+
+  render(localStorage)
+}
+
 function fetchRandom(){
 var apiList=[
-<<<<<<< HEAD
   'fetchJoke','fetchDogs','fetchFact', 'fetchCatFacts', 'fetchCats'
-=======
-  'fetchJoke','fetchDogs','fetchNumber'
->>>>>>> a96e20fd41fede960a5d5c438f6e8d4935695346
 ]
 var i = apiList[Math.floor(Math.random()* apiList.length)]
 console.log(i)
@@ -281,7 +313,7 @@ else if (i === 'fetchNumber'){
 }
 else if (i === 'fetchCatFacts')
 fetchCatFacts();
-else if (i === fetchCats)
+else if (i === 'fetchCats')
 fetchCats();
 };
 
@@ -304,3 +336,4 @@ jokesButton.addEventListener("click", fetchJoke);
 randomButton.addEventListener("click", fetchRandom);
 catBtn.addEventListener("click", fetchCats);
 catFactsBtn.addEventListener("click", fetchCatFacts);
+likeButton.addEventListener('click', getLikes);
