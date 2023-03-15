@@ -10,6 +10,7 @@ var MemesButton = document.getElementById("Memes-button");
 var displayText = document.getElementById("content");
 var resetButton = document.getElementById("reset");
 var displayPic = document.getElementById("content");
+var likeButton = document.getElementById("like");
 
 resetButton.addEventListener("click", function () {
   location.reload();
@@ -17,7 +18,8 @@ resetButton.addEventListener("click", function () {
 
 function refresh() {
   location.reload();
-}
+} 
+
 
 //Jokes
 
@@ -84,8 +86,14 @@ function fetchCatFacts() {
     })
     .then((data) => {
       console.log(data);
-      displayPic.innerHTML = `<p>${data.fact}</p>`;
+      render(data);
     });
+
+  function render(data) {
+    var catFacts = document.createElement("p");
+    catFacts.innerHTML = `<p>${data.fact}</p>`;
+    displayPic.appendChild(catFacts);
+  }
 }
 
 //Api to fetch dog pics
@@ -142,6 +150,25 @@ function render(data) {
 }
 
 //Cat Button for pictures of cats
+// function fetchCats() {
+//   var url = "https://cataas.com/cat";
+
+//   fetch(url)
+//     .then((response) => {
+//       if (response.ok) {
+//         //Used .blob instead of .json because the API returns an image file, not JSON data.
+//         //https://developer.mozilla.org/en-US/docs/Web/API/Response/blob
+//         return response.blob();
+//       } else {
+//         Error("Something doesn't work!");
+//       }
+//     })
+//     .then((myBlob) => {
+//       var imageUrl = URL.createObjectURL(myBlob);
+//       displayPic.innerHTML = `<img src= "${imageUrl}" alt="Random cat image">`;
+//       console.log(myBlob)
+//     });
+//   };
 function fetchCats() {
   var url = "https://cataas.com/cat";
 
@@ -157,16 +184,15 @@ function fetchCats() {
     })
     .then((myBlob) => {
       var imageUrl = URL.createObjectURL(myBlob);
-      displayPic.innerHTML = `<img src= "${imageUrl}" alt="Random cat image">`;
+      render(imageUrl);
     });
 
-  function render(data) {
-    var dogPics = document.createElement("p");
-    dogPics.innerHTML = `<img src="${data.url}"class = "width" alt="Random dog image">`;
-    displayPic.appendChild(dogPics);
+  function render(imageUrl) {
+    var paragraph = document.createElement("p");
+    displayPic.innerHTML = `<img src= "${imageUrl}" alt="Random cat image">`;
+    displayPic.appendChild(paragraph);
   }
 }
-
 //recipes
 // var foodButton = document.querySelector('#food')
 
@@ -208,48 +234,87 @@ var foodButton = document.querySelector("#food-button");
 
 //favorite button
 // var userInput = document.querySelector('userinput').value
+
 var favoritebutton = document.querySelector("#favorite");
 
 favoritebutton.addEventListener("click", function () {
   //    var userInput = document.querySelector('userinput').value
   var content = document.querySelector("#content");
   // console.log(content.children[1].children[0].src)
-  var history = JSON.parse(localStorage.getItem("history")) || [];
-  if (content.children[1].children[0] === "IMG") {
+  var history = JSON.parse(localStorage.getItem("history")) || []
+  var saveContent = content.children[1].children[0];
+  var otherContent = content.children[1];
+  if (typeof saveContent !== 'undefined' && saveContent.tagName === "IMG") {
     //if we get remove p tag with place holder change first child to index of 0
-    console.log("I made it");
+    // console.log("I made it");
     history.push(content.children[1].children[0].src);
-  } else {
+  }
+   else {
     history.push(content.children[1].textContent);
   }
   localStorage.setItem("history", JSON.stringify(history));
 });
 
-function fetchRandom() {
-  var apiList = [
-    "fetchJoke",
-    "fetchDogs",
-    "fetchNumber",
-    "fetchMemes",
-    "fetchCats",
-    "fetchCatFacts",
-  ];
-  var i = apiList[Math.floor(Math.random() * apiList.length)];
-  console.log(i);
-  if (i === "fetchJoke") {
-    fetchJoke();
-  } else if (i === "fetchDogs") {
-    fetchDogs();
-  } else if (i === "fetchNumber") {
-    fetchNumber();
-  } else if (i === "fetchMemes") {
-    fetchMemes();
-  } else if (i === "fetchCats") {
-    fetchCats();
-  } else if (i === "fetchCatFacts") {
-    fetchCatFacts();
+function checkUrl(string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (err) {
+    return false;
   }
 }
+
+function getLikes() {
+  var content = document.querySelector("#content");
+  var myLikes = JSON.parse(localStorage.getItem('history'));
+  for (var i = 0; i < myLikes.length; i++ ){
+    if (checkUrl(myLikes[i])){ 
+      var myImage = document.createElement('img')
+      myImage.src = myLikes[i];
+      // set the source of the image href = i 
+      displayText.appendChild(myImage);
+      
+    } else {
+      // build paragraph tag and set content 
+      var like = document.createElement("p");
+      like.textContent = myLikes[i];
+      displayText.appendChild(like);
+    }
+  
+  }
+
+  render(localStorage)
+}
+
+function fetchRandom(){
+var apiList=[
+  'fetchJoke','fetchDogs','fetchFact', 'fetchCatFacts', 'fetchCats'
+]
+var i = apiList[Math.floor(Math.random()* apiList.length)]
+console.log(i)
+if (i==='fetchJoke'){
+  fetchJoke();
+}
+else if (i === 'fetchDogs'){
+  fetchDogs();
+}
+else if (i === 'fetchNumber'){
+  fetchNumber();
+}
+else if (i === 'fetchCatFacts')
+fetchCatFacts();
+else if (i === 'fetchCats')
+fetchCats();
+};
+
+
+
+
+
+
+
+
+
 
 // factsButton.addEventListener("click", fetchFact);
 dogBtn.addEventListener("click", fetchDogs);
@@ -260,3 +325,4 @@ catBtn.addEventListener("click", fetchCats);
 catFactsBtn.addEventListener("click", fetchCatFacts);
 foodButton.addEventListener("click", fetchFood);
 numberButton.addEventListener("click", fetchNumber);
+likeButton.addEventListener("click", getLikes);
