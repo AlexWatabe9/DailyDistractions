@@ -12,12 +12,15 @@ h1 {
 h2 {
   display: flex;
   align-content: center;
-  
 }
 nav {
   height: 50px;
   background-color: #3e791f;
   overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 nav button {
@@ -39,79 +42,40 @@ nav button:hover {
 }
 
 #content {
-  margin-top: 20px;
+  margin: 20px auto;
   padding: 20px;
   border: 1px solid #ddd;
-  float: left;
-  width: 70%;
+  width: 100%;
 }
 
 #like,
-#dislike {
-  display: block;
-  float: right;
-  margin-right: 20px;
-  margin-top: 20px;
-  padding: 10px;
+#favorite,
+#reset {
+  padding: 14px 16px;
   font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#like {
-  background-color: #4caf50;
-  color: white;
-}
-
-#dislike {
-  background-color: #f44336;
-  color: white;
-}
-.width{
-  width:300px
-}
-/* nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-}
-
-nav ul li {
-  margin: 0 10px;
-}
-
-button {
-  background-color: #4caf6d;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  text-align: center;
+  border: none;
   cursor: pointer;
-  border-radius: 25px;
+  color: white;
 }
 
-button:hover {
-  background-color: rgb(50, 52, 148);
-  color: black;
-  border: 2px solid #080808;
+.width {
+  width: 300px;
 }
 
-.box {
-  width: 500px;
-  height: 500px;
-  background-color: #abaaaf;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
+@media screen and (max-width: 500px) {
+  body {
+    font-size: 14px;
+  }
+  nav {
+    flex-wrap: wrap;
+  }
+  nav button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  #content {
+    margin-top: 20px;
+  }
+}
