@@ -12,16 +12,7 @@ var resetButton = document.getElementById("reset");
 var displayPic = document.getElementById("content");
 var likeButton = document.getElementById("like");
 var favoritebutton = document.querySelector("#favorite");
-
-//Reset Button to refresh the page, clearing the content
-
-resetButton.addEventListener("click", function () {
-  location.reload();
-});
-
-function refresh() {
-  location.reload();
-}
+var foodButton = document.querySelector("#food-button");
 
 //API to fetch Jokes
 
@@ -47,7 +38,6 @@ function renderJoke(data) {
     jokeEl.textContent = data.joke;
     displayText.appendChild(jokeEl);
   } else {
-    //my code goes here
     jokeEl.textContent = data.setup + data.delivery;
     displayText.appendChild(jokeEl);
   }
@@ -181,7 +171,6 @@ function fetchCats() {
 //recipes
 
 function fetchFood() {
-  // var url = "https://www.themealdb.com/api/json/v1/1/categories.php";
   var url = "https://www.themealdb.com/api/json/v1/1/random.php";
   fetch(url)
     .then((response) => {
@@ -213,8 +202,6 @@ function fetchFood() {
     displayText.appendChild(recipeList);
   }
 }
-
-var foodButton = document.querySelector("#food-button");
 
 //Function to save liked content to local storage
 
@@ -286,7 +273,18 @@ function fetchRandom() {
   else if (i === "fetchCats") fetchCats();
 }
 
-// factsButton.addEventListener("click", fetchFact);
+//Reset Button to refresh the page, clearing the content
+
+resetButton.addEventListener("click", function () {
+  location.reload();
+});
+
+function refresh() {
+  location.reload();
+}
+
+//Event Listeners
+
 dogBtn.addEventListener("click", fetchDogs);
 randomButton.addEventListener("click", fetchRandom);
 jokesButton.addEventListener("click", fetchJoke);
