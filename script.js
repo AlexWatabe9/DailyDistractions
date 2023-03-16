@@ -247,8 +247,6 @@ function getLikes() {
       displayText.appendChild(like);
     }
   }
-
-  render(localStorage);
 }
 
 //Function for the Random option that chooses from all of the categories
