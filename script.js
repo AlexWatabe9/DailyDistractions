@@ -247,6 +247,10 @@ function getLikes() {
       displayText.appendChild(like);
     }
   }
+  var myBlob = JSON.parse(localStorage.getItem('history'))[0]
+  var imageUrl = URL.createObjectURL(myBlob);
+      render(imageUrl);
+  // render(localStorage);
 }
 
 //Function for the Random option that chooses from all of the categories
